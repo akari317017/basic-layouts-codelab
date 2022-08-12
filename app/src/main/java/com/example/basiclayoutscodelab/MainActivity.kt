@@ -10,7 +10,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Pets
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -31,7 +31,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    PhotographerCard()
+//                    PhotographerCard()
+                    LayoutsCodeLab()
                 }
             }
         }
@@ -48,13 +49,16 @@ fun LayoutsCodeLab() {
                 },
                 actions = {
                     IconButton(onClick = {/*ここに何するかかくよー*/ }) {
-                        Icon(Icons.Filled.Favorite, contentDescription = null)
+                        Icon(Icons.Filled.Pets, contentDescription = null)
                     }
                 }
             )
         }
     ) { innerPadding ->
-        BodyContent(Modifier.padding(innerPadding))
+        BodyContent(
+            Modifier
+                .padding(innerPadding)
+                .padding(8.dp))
     }
 }
 
