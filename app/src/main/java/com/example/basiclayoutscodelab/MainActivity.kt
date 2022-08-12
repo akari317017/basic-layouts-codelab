@@ -244,9 +244,7 @@ fun LayoutsCodeLab() {
         }
     ) { innerPadding ->
         BodyContent(
-            Modifier
-                .padding(innerPadding)
-                .padding(8.dp)
+            Modifier.padding(innerPadding)
         )
     }
 }
@@ -279,22 +277,26 @@ val topics = listOf(
 
 @Composable
 fun BodyContent(modifier: Modifier = Modifier) {
-    StaggeredGrid(
-        modifier = modifier.verticalScroll(rememberScrollState()),
-        rows = topics.size
-    ) {
-        for (topic in topics) {
-            Chip(modifier = Modifier.padding(8.dp), text = topic)
+    Row(modifier = modifier
+        .background(color = Color.LightGray)
+        .padding(16.dp)
+        .size(200.dp)
+        .verticalScroll(rememberScrollState()),
+        content = {
+            StaggeredGrid(rows = topics.size) {
+                for (topic in topics) {
+                    Chip(modifier = Modifier.padding(8.dp), text = topic)
+                }
+            }
         }
-    }
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun LayoutsCodeLabPreview() {
     BasicLayoutsCodelabTheme {
-//        LayoutsCodeLab()
-        BodyContent()
+        LayoutsCodeLab()
     }
 }
 
