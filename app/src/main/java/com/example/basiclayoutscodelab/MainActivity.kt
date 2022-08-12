@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.example.basiclayoutscodelab.ui.theme.BasicLayoutsCodelabTheme
+import com.example.util.firstBaselineToTop
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -43,6 +44,22 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun TextWithPaddingToBaselinePreview() {
+    BasicLayoutsCodelabTheme {
+        Text("Hi there!", Modifier.firstBaselineToTop(32.dp))
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun TextWithNormalPaddingPreview() {
+    BasicLayoutsCodelabTheme {
+        Text("Hi there!", Modifier.padding(top = 32.dp))
     }
 }
 
