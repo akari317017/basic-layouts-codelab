@@ -3,10 +3,7 @@ package com.example.basiclayoutscodelab
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -254,13 +251,41 @@ fun LayoutsCodeLab() {
     }
 }
 
+val topics = listOf(
+    "Arts & Crafts",
+    "Beauty",
+    "Books",
+    "Business",
+    "Comics",
+    "Culinary",
+    "Design",
+    "Fashion",
+    "Film",
+    "History",
+    "Maths",
+    "Music",
+    "People",
+    "Philosophy",
+    "Religion",
+    "Social sciences",
+    "Technology",
+    "TV",
+    "Writing",
+    "ねこ",
+    "うさぎ",
+    "いぬ",
+    "はむたろう"
+)
+
 @Composable
 fun BodyContent(modifier: Modifier = Modifier) {
-    MyOwnColumn(modifier.padding(8.dp)) {
-        Text("MyOwnColumn")
-        Text("place items")
-        Text("vertically.")
-        Text("We've done it by hand!")
+    StaggeredGrid(
+        modifier = modifier.verticalScroll(rememberScrollState()),
+        rows = topics.size
+    ) {
+        for (topic in topics) {
+            Chip(modifier = Modifier.padding(8.dp), text = topic)
+        }
     }
 }
 
@@ -268,7 +293,8 @@ fun BodyContent(modifier: Modifier = Modifier) {
 @Composable
 fun LayoutsCodeLabPreview() {
     BasicLayoutsCodelabTheme {
-        LayoutsCodeLab()
+//        LayoutsCodeLab()
+        BodyContent()
     }
 }
 
