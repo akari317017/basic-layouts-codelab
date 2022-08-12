@@ -20,6 +20,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -42,6 +43,37 @@ class MainActivity : ComponentActivity() {
 //                    LayoutsCodeLab()
                     ImageList()
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun MyOwnColumn(
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
+    Layout(
+        modifier = modifier,
+        content = content
+    ) { measurables, constraints ->
+        //測定された子のリスト
+        val placeables = measurables.map { measurable ->
+            measurable.measure(constraints)
+        }
+
+        //子を配置したy座標
+        var yPosition = 0
+
+        //layoutSizeはできるだけ大きく設定(max)
+        layout(constraints.maxWidth, constraints.maxHeight) {
+            //親に子をplace
+            placeables.forEach { placeable ->
+                //画面上にアイテムを配置
+                placeable.placeRelative(x = 0, y = yPosition)
+
+                //配置したy座標を記録
+                yPosition += placeable.height
             }
         }
     }
@@ -141,9 +173,11 @@ fun LayoutsCodeLab() {
 
 @Composable
 fun BodyContent(modifier: Modifier = Modifier) {
-    Column(modifier = modifier) {
-        Text(text = "Hi there!")
-        Text(text = "Thanks for going through the Layouts codelab")
+    MyOwnColumn(modifier.padding(8.dp)) {
+        Text("MyOwnColumn")
+        Text("place items")
+        Text("vertically.")
+        Text("We've done it by hand!")
     }
 }
 
